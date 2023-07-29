@@ -16,5 +16,9 @@ namespace MvcProje.Controllers
             var categoryValues = cm.GetAll();
             return View(categoryValues);
         }
+        public PartialViewResult BlogDetailsCategoryList()
+        {
+            return PartialView();
+        }
     }
 }
