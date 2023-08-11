@@ -1,4 +1,6 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using PagedList;
 using PagedList.Mvc;
 using System;
@@ -19,7 +21,7 @@ namespace MvcProje.Controllers
         }
         public PartialViewResult BlogList(int page = 1)
         {
-            var blogList = bm.GetAll().ToPagedList(page,6);
+            var blogList = bm.GetAll().ToPagedList(page, 6);
             return PartialView(blogList);
         }
         public PartialViewResult FeaturedPosts()
@@ -90,9 +92,95 @@ namespace MvcProje.Controllers
             var BlogDetailsList = bm.GetBlogByID(id);
             return PartialView(BlogDetailsList);
         }
-        public ActionResult BlogByCategory()
+        public ActionResult BlogByCategory(int id)
         {
+            var BlogListByCategory = bm.GetBlogByCategory(id);
+            var CategoryName = bm.GetBlogByCategory(id).Select(y => y.Category.CategoryName).FirstOrDefault();
+            ViewBag.categoryName = CategoryName;
+
+            var CategoryDescription = bm.GetBlogByCategory(id).Select(y => y.Category.CategoryDescription).FirstOrDefault();
+            ViewBag.categoryDescription = CategoryDescription;
+            return View(BlogListByCategory);
+        }
+        public ActionResult AdminBlogList()
+        {
+            var bloglist = bm.GetAll();
+            return View(bloglist);
+        }
+
+        [HttpGet]
+        public ActionResult AddNewBlog()
+        {
+            Context c = new Context();
+            List<SelectListItem> values = (from x in c.Categories.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CategoryName,
+                                               Value = x.CategoryID.ToString()
+
+                                           }).ToList();
+            ViewBag.values = values;
+
+            List<SelectListItem> values2 = (from x in c.Authors.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.AuthorName,
+                                                Value = x.AuthorID.ToString()
+
+                                            }).ToList();
+            ViewBag.values2 = values2;
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult AddNewBlog(Blog b)
+        {
+            bm.BlogAddBL(b);
+            return RedirectToAction("AdminBlogList");
+        }
+        public ActionResult DeleteBlog(int id)
+        {
+            bm.DeleteBlogBL(id);
+            return RedirectToAction("AdminBlogList");
+        }
+
+        [HttpGet]
+        public ActionResult UpdateBlog(int id)
+        {
+            Blog blog = bm.FindBlog(id);
+            Context c = new Context();
+            List<SelectListItem> values = (from x in c.Categories.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CategoryName,
+                                               Value = x.CategoryID.ToString()
+
+                                           }).ToList();
+            ViewBag.values = values;
+
+            List<SelectListItem> values2 = (from x in c.Authors.ToList()
+                                            select new SelectListItem
+                                            {
+                                                Text = x.AuthorName,
+                                                Value = x.AuthorID.ToString()
+
+                                            }).ToList();
+            ViewBag.values2 = values2;
+            return View(blog);
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateBlog(Blog p)
+        {
+            bm.UpdateBlog(p);
+            return RedirectToAction("AdminBlogList");
+        }
+        public ActionResult GetCommentByBlog(int id)
+        {
+            CommentManager cm=new CommentManager();
+            var commentList=cm.CommentByBlog(id);
+            return View(commentList);
         }
     }
 }

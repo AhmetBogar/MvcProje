@@ -10,20 +10,23 @@ namespace MvcProje.Controllers
     public class AboutController : Controller
     {
         // GET: About
-        
+        AboutManager abm = new AboutManager();
         public ActionResult Index()
         {
-            return View();
+            var aboutcontent = abm.GetAll();
+            return View(aboutcontent);
         }
         public PartialViewResult Footer()
         {
-            AboutManager abm = new AboutManager();
+
             var aboutContentList=abm.GetAll();
             return PartialView(aboutContentList);
         }
         public PartialViewResult MeetTheTeam()
         {
-            return PartialView();
+            AuthorManager autman= new AuthorManager();
+            var authorList=autman.GetAll();
+            return PartialView(authorList);
         }
     }
 }
