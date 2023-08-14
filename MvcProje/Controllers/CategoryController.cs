@@ -21,5 +21,10 @@ namespace MvcProje.Controllers
             var categoryValues = cm.GetAll();
             return PartialView(categoryValues);
         }
+        public ActionResult AdminCategoryList()
+        {
+            var categorylist=cm.GetAll();
+            return View(categorylist);
+        }
     }
 }
