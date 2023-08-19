@@ -1,13 +1,10 @@
 ﻿@model EntityLayer.Concrete.Blog
 @{
-    ViewBag.Title = "UpdateBlog";
+    ViewBag.Title = "AddNewBlog";
     Layout = "~/Views/Shared/_AuthorLayout.cshtml";
 }
 
 <form class="form-group" method="post">
-    @Html.Label("Blog ID")
-    @Html.TextBoxFor(x => x.BlogID, new { @class = "form-control" })
-    <br />
     @Html.Label("Blog Başlığı")
     @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
     <br />
