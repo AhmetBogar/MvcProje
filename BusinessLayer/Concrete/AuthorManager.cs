@@ -37,7 +37,7 @@ namespace BusinessLayer.Concrete
         public int EditAuthor(Author p)
         {
             Author author=repoauthor.Find(x=>x.AuthorID == p.AuthorID);
-            author.AuthorShort = p.AuthorAbout;
+            author.AuthorShort = p.AuthorShort;
             author.AuthorName = p.AuthorName;
             author.AuthorImage = p.AuthorImage;
             author.AuthorAbout = p.AuthorAbout;
