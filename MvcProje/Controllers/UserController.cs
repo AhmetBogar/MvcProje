@@ -6,17 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MvcProje.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         // GET: User
-        UserProfileManager userProfile=new UserProfileManager();
+        UserProfileManager userProfile = new UserProfileManager();
         BlogManager bm = new BlogManager();
         public ActionResult Index()
         {
-            
+
             return View();
         }
         public PartialViewResult Partial1(string p)
@@ -32,11 +34,11 @@ namespace MvcProje.Controllers
         }
         public ActionResult BlogList(string p)
         {
-            
+
             p = (string)Session["Mail"];
-            Context c=new Context();
-            int id=c.Authors.Where(x=>x.Mail==p).Select(y=>y.AuthorID).FirstOrDefault();
-            var blogs=userProfile.GetBlogByAuthor(id);
+            Context c = new Context();
+            int id = c.Authors.Where(x => x.Mail == p).Select(y => y.AuthorID).FirstOrDefault();
+            var blogs = userProfile.GetBlogByAuthor(id);
             return View(blogs);
         }
         [HttpGet]
@@ -100,6 +102,12 @@ namespace MvcProje.Controllers
         {
             bm.BlogAddBL(b);
             return RedirectToAction("BlogList");
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
+            return RedirectToAction("AuthorLogin", "Login");
         }
     }
 }

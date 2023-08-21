@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MailSubscribeController.cs" />
@@ -152,6 +153,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminLoginForm\css\font-awesome.css" />
+    <Content Include="adminLoginForm\css\style.css" />
+    <Content Include="adminLoginForm\images\bg.jpg" />
+    <Content Include="adminLoginForm\index.html" />
+    <Content Include="adminLoginForm\w3layouts-License.txt" />
     <Content Include="AdminLTE-3.0.4\build\config\postcss.config.js" />
     <Content Include="AdminLTE-3.0.4\build\config\rollup.config.js" />
     <Content Include="AdminLTE-3.0.4\build\js\AdminLTE.js" />
@@ -2439,6 +2445,15 @@
     <Content Include="Report-Login-Free\fonts\fontawesome-webfont.woff" />
     <Content Include="Report-Login-Free\fonts\fontawesome-webfont.woff2" />
     <Content Include="Report-Login-Free\fonts\FontAwesome.otf" />
+    <Content Include="web\css\404page.css" />
+    <Content Include="web\images\error.jpg" />
+    <Content Include="web\index.html" />
+    <Content Include="web\w3layouts-License.txt" />
+    <Content Include="adminLoginForm\fonts\fontawesome-webfont.eot" />
+    <Content Include="adminLoginForm\fonts\fontawesome-webfont.ttf" />
+    <Content Include="adminLoginForm\fonts\fontawesome-webfont.woff" />
+    <Content Include="adminLoginForm\fonts\fontawesome-webfont.woff2" />
+    <Content Include="adminLoginForm\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2511,6 +2526,8 @@
     <Content Include="Views\User\BlogList.cshtml" />
     <Content Include="Views\User\UpdateBlog.cshtml" />
     <Content Include="Views\User\AddNewBlog.cshtml" />
+    <Content Include="Views\Error\Page404.cshtml" />
+    <Content Include="Views\Login\AdminLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
