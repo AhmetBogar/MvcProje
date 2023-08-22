@@ -14,11 +14,16 @@ namespace MvcProje.Controllers
 
         BlogManager blockmanager= new BlogManager();
         AuthorManager authormanager= new AuthorManager();
+
+
+        [AllowAnonymous]
         public PartialViewResult AuthorAbout(int id)
         {
             var authorDetail=blockmanager.GetBlogByID(id);
             return PartialView(authorDetail);
         }
+
+        [AllowAnonymous]
         public PartialViewResult AuthorPopularPost(int id)
         {
             var blogauthorid=blockmanager.GetAll().Where(x=>x.BlogID==id).Select(y=>y.AuthorID).FirstOrDefault();

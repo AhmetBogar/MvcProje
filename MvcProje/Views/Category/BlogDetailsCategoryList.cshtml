@@ -5,7 +5,7 @@
     <ul class="categories">
         @foreach (var item in Model)
         {
-            <li><a href="#">@item.CategoryName<span>(0)</span></a> </li>
+            <li><a href="/Blog/BlogByCategory/@item.CategoryID">@item.CategoryName<span></span></a> </li>
         }
     </ul>
     </div>

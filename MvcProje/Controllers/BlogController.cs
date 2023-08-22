@@ -15,15 +15,21 @@ namespace MvcProje.Controllers
     {
         // GET: Blog
         BlogManager bm = new BlogManager();
+
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
+
+        [AllowAnonymous]
         public PartialViewResult BlogList(int page = 1)
         {
             var blogList = bm.GetAll().ToPagedList(page, 6);
             return PartialView(blogList);
         }
+
+        [AllowAnonymous]
         public PartialViewResult FeaturedPosts()
         {
             //1.post
@@ -91,24 +97,34 @@ namespace MvcProje.Controllers
 
             return PartialView();
         }
+
+        [AllowAnonymous]
         public PartialViewResult OtherFeaturedPosts()
         {
             return PartialView();
         }
+
+        [AllowAnonymous]
         public ActionResult BlogDetails()
         {
             return View();
         }
+
+        [AllowAnonymous]
         public PartialViewResult BlogCover(int id)
         {
             var BlogDetailsList = bm.GetBlogByID(id);
             return PartialView(BlogDetailsList);
         }
+
+        [AllowAnonymous]
         public PartialViewResult BlogReadAll(int id)
         {
             var BlogDetailsList = bm.GetBlogByID(id);
             return PartialView(BlogDetailsList);
         }
+
+        [AllowAnonymous]
         public ActionResult BlogByCategory(int id)
         {
             var BlogListByCategory = bm.GetBlogByCategory(id);
@@ -120,7 +136,7 @@ namespace MvcProje.Controllers
             return View(BlogListByCategory);
         }
 
-        [Authorize]
+
         public ActionResult AdminBlogList()
         {
             var bloglist = bm.GetAll();
@@ -207,6 +223,12 @@ namespace MvcProje.Controllers
             CommentManager cm=new CommentManager();
             var commentList=cm.CommentByBlog(id);
             return View(commentList);
+        }
+        public ActionResult AuthorBlogList(int id)
+        {
+
+            var blogs = bm.GetBlogByAuthor(id);
+            return View(blogs);
         }
     }
 }
