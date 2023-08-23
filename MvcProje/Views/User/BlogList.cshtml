@@ -6,6 +6,7 @@
 
 @{string color = "";}
 @{string casename = "";}
+@{int puan=1;}
 
 <!DOCTYPE html>
 
@@ -91,24 +92,24 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            puan = item.BlogRating * 10;
 
-
-                            if (item.BlogRating >= 85)
+                            if (puan >= 85)
                             {
                                 color = "post-category text-white bg-success mb-3";
                                 casename = "Çok iyi";
                             }
-                            if (item.BlogRating >= 70 && item.BlogRating <= 84)
+                            if (puan >= 70 && puan <= 84)
                             {
                                 color = "post-category text-white bg-info mb-3";
                                 casename = "İyi";
                             }
-                            if (item.BlogRating >= 50 && item.BlogRating <= 69)
+                            if (puan >= 50 && puan <= 69)
                             {
                                 color = "post-category text-warning bg-warning mb-3";
                                 casename = "İdare eder";
                             }
-                            if (item.BlogRating >= 0 && item.BlogRating <= 49)
+                            if (puan >= 0 && puan <= 49)
                             {
                                 color = "post-category text-white bg-danger mb-3";
                                 casename = "Kötü";
@@ -135,7 +136,7 @@
 
                                     <div class="progress progress-sm">
 
-                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="10" aria-volumemin="0" aria-volumemax="10" style="width: @item.BlogRating%">
+                                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="10" aria-volumemin="0" aria-volumemax="10" style="width: @puan%">
 
                                         </div>
 
@@ -143,7 +144,7 @@
 
                                     <small>
 
-                                        Aldığı Puan:  @item.BlogRating
+                                        Aldığı Puan:  @puan
 
                                     </small>
 
